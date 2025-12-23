@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import appsflyerRoutes from "./routes/appsflyer.js";
+import registerdevice from "./routes/registerdevice.js";
+import health from "./routes/health.js";
 import cronRoutes from "./routes/cron.js";
 
 dotenv.config();
@@ -15,7 +17,9 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB error", err));
 
+app.use("/", health);
 app.use("/webhook", appsflyerRoutes);
+app.use("/webhook", registerdevice);
 app.use("/cron", cronRoutes);
 
 const PORT = process.env.PORT || 3000;
