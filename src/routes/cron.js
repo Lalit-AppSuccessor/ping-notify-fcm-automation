@@ -9,8 +9,8 @@ router.post("/ping-inactive", async (req, res) => {
     Number(process.env.INACTIVE_LIMIT_HOURS) * 60 * 60 * 1000;
   const pingIntervalMs =
     Number(process.env.PING_INTERVAL_HOURS) * 60 * 60 * 1000;
-  console.log(inactiveLimitMs, pingIntervalMs);
-  const now = Date.now();
+  
+    const now = Date.now();
 
   const users = await UserActivity.find({
     lastActiveAt: { $lte: new Date(now - inactiveLimitMs) },
@@ -30,7 +30,10 @@ router.post("/ping-inactive", async (req, res) => {
     pinged++;
   }
 
-  res.json({ success: true, pingedUsers: pinged });
+  res.json({
+    success: true,
+    pingedUsers: "Notification sent to " + pinged + " user.",
+  });
 });
 
 export default router;
