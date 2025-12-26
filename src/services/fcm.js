@@ -21,14 +21,14 @@ export async function sendPush(user) {
       token: user.fcmToken,
       notification: {
         title: "We miss you 👋",
-        body: "You’ve been inactive. Open the app now!",
+        body: "You have been inactive. Open the app now!",
       },
       data: {
         deeplink: "myapp://home",
       },
     });
   } catch (err) {
-    console.error("❌ FCM error:", err.code);
+    console.error("❌ FCM error:", String(err));
 
     //  Mark token invalid if FCM rejects it
     if (
