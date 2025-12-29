@@ -4,7 +4,7 @@ import { sendPush } from "../services/fcm.js";
 
 const router = express.Router();
 
-router.post("/ping-inactive", async (req, res) => {
+router.get("/ping-inactive", async (req, res) => {
   const inactiveLimitMs =
     Number(process.env.INACTIVE_LIMIT_HOURS) * 60 * 60 * 1000;
   const pingIntervalMs =
